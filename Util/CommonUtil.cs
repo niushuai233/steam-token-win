@@ -11,6 +11,7 @@ namespace steam_token.Util
     public class CommonUtil
     {
 
+        public static bool FIRST_ENABLE  = true;
         public static Config GetConfig()
         {
             return ConfigUtil.Read<Config>();

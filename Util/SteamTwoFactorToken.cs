@@ -47,7 +47,11 @@ namespace steam_token.Util
             }
             catch (Exception)
             {
-                MessageBox.Show("shared_secret值校验失败, 请重新设置"); 
+                if (!CommonUtil.FIRST_ENABLE)
+                {
+                    MessageBox.Show("shared_secret值校验失败, 请重新设置"); 
+                }
+                CommonUtil.FIRST_ENABLE = false;
                 return false;
             }
         }

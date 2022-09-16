@@ -23,13 +23,12 @@ namespace steam_token
             ConfigUtil.Init(new Config());
             InitializeComponent();
 
-            this.timer_time.Start();
-
             while (!ConfigUtil.INIT_SUCCESS) 
             { 
                 CheckConfig();
             }
 
+            this.timer_time.Start();
             // 新开一个线程去初始化数据
             SteamGuardCalcThread.StartThread(this.label_guard, this.progressBar_refresh);
         }
