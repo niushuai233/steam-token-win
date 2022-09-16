@@ -12,6 +12,7 @@ namespace Util
 {
     public class ConfigUtil
     {
+        public static bool INIT_SUCCESS = false;
         public static string CONFIG_NAME = steam_token.Properties.Resources.CONFIG_NAME;
         public static string CONFIG_FOLDER = steam_token.Properties.Resources.CONFIG_FOLDER;
 

@@ -105,6 +105,7 @@ namespace steam_token.UI.Set
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(539, 132);
+            this.ControlBox = false;
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -112,6 +113,7 @@ namespace steam_token.UI.Set
             this.Controls.Add(this.button_openfile);
             this.Controls.Add(this.button_confirm);
             this.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using steam_token.Entity;
+using steam_token.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,16 +17,18 @@ namespace steam_token.UI.Set
 {
     public partial class GuardConfig : Form
     {
-        private SteamGuard steamGuard;
-        public GuardConfig()
+        private Label labelGuard;
+        private ProgressBar progressBarRefresh;
+        public GuardConfig(Label label_guard, ProgressBar progressBar_refresh)
         {
+            this.labelGuard = label_guard;
+            this.progressBarRefresh = progressBar_refresh;
             InitializeComponent();
             // 先初始化组件 再使用
-            Config config = ConfigUtil.Read<Config>();
-            steamGuard = config.SteamGuard;
-            if (null != steamGuard && !string.IsNullOrEmpty(steamGuard.shared_secret))
+            Config config = CommonUtil.GetConfig();
+            if (null != config && null != config.SteamGuard && !string.IsNullOrEmpty(config.SteamGuard.shared_secret))
             {
-                this.textBox_shared_secret.Text = steamGuard.shared_secret;
+                this.textBox_shared_secret.Text = config.SteamGuard.shared_secret;
             }
         }
 
@@ -55,18 +58,18 @@ namespace steam_token.UI.Set
             string fileStr = Encoding.UTF8.GetString(bytes);
 
             ParseSteamGuard(fileStr);
-
-
         }
 
+        private SteamGuard tmpSteamGuard;
         private void ParseSteamGuard(string fileStr)
         {
             try
             {
-                steamGuard = JsonConvert.DeserializeObject<SteamGuard>(fileStr);
-                Console.WriteLine(steamGuard);
+                tmpSteamGuard = JsonConvert.DeserializeObject<SteamGuard>(fileStr);
+                Console.WriteLine(tmpSteamGuard);
 
-                this.textBox_shared_secret.Text = steamGuard.shared_secret;
+                this.textBox_shared_secret.Text = tmpSteamGuard.shared_secret;
+
             }
             catch (JsonReaderException)
             {
@@ -80,16 +83,32 @@ namespace steam_token.UI.Set
 
         private void button_confirm_Click(object sender, EventArgs e)
         {
-            if (null == steamGuard)
+            string text = this.textBox_shared_secret.Text;
+            if (string.IsNullOrEmpty(text))
             {
-                MessageBox.Show("熬, 未知操作!!!");
+                MessageBox.Show("请输入shared_secret值");
                 return;
             }
+            if (SteamTwoFactorToken.Verify(text))
+            {
+                Config config = ConfigUtil.Read<Config>();
+                if (null == config)
+                {
+                    config = new Config();
+                }
+                if (null == tmpSteamGuard)
+                {
+                    tmpSteamGuard = new SteamGuard();
+                    tmpSteamGuard.shared_secret = text;
+                }
+                config.SteamGuard = tmpSteamGuard;
+                ConfigUtil.Save<Config>(config);
 
-            Config config = ConfigUtil.Read<Config>();
-            config.SteamGuard = steamGuard;
-            ConfigUtil.Save<Config>(config);
-            this.Dispose();
+                // 配置更新 重新计算值
+                SteamGuardCalcThread.StartThread(labelGuard, progressBarRefresh);
+
+                this.Dispose();
+            }
         }
     }
 }

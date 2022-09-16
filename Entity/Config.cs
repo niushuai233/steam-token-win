@@ -8,6 +8,10 @@ namespace steam_token.Entity
 {
     public class Config
     {
+        public Config()
+        {
+            SteamGuard = new SteamGuard();
+        }
         public SteamGuard SteamGuard { get; set; }
 
     }

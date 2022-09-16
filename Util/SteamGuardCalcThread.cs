@@ -50,20 +50,28 @@ namespace steam_token.Util
                 Console.WriteLine("未发现配置的秘钥");
                 return;
             }
-            
+            CalcOnce();
             for (int i = 30; i >= 0; i--)
             {
                 Thread.Sleep(1000);
                 if (i == 0)
                 {
-                    string guard = SteamTwoFactorToken.GenerateSteamGuardCode(shared_secret);
-                    label_guard.Text = guard;
+                    CalcOnce();
                     i = 30;
-                    Console.WriteLine("重新设值: " + guard);
                 }
 
                 progressBar_refresh.Value = i;
             }
+        }
+
+
+        private static string CalcOnce()
+        {
+            Config config = ConfigUtil.Read<Config>();
+            string guard = SteamTwoFactorToken.GenerateSteamGuardCode(config.SteamGuard.shared_secret);
+            Console.WriteLine("calc once guard = " + guard);
+            label_guard.Text = guard;
+            return guard;
         }
     }
 }

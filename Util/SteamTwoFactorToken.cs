@@ -1,10 +1,12 @@
-﻿using System;
+﻿using steam_token.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Util;
 
 namespace steam_token.Util
 {
@@ -13,19 +15,44 @@ namespace steam_token.Util
         private static byte[] s_rgchSteamguardCodeChars = { 50, 51, 52, 53, 54, 55, 56, 57, 66, 67, 68, 70, 71, 72, 74, 75, 77, 78, 80, 81, 82, 84, 86, 87, 88, 89 };
         private byte[] mSecret;
 
-        public SteamTwoFactorToken(String sharedSecret)
+        public SteamTwoFactorToken(string sharedSecret)
         {
-            if (!string.IsNullOrEmpty(sharedSecret))
+            try
             {
-                this.mSecret = Convert.FromBase64String(sharedSecret);
+                if (!string.IsNullOrEmpty(sharedSecret))
+                {
+                    this.mSecret = Convert.FromBase64String(sharedSecret);
+                }
+                else
+                {
+                    MessageBox.Show("请配置shared_secret值");
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("未知的shared_secret");
+                ConfigUtil.Init(new Config());
+                MessageBox.Show("shared_secret值不符合要求, 请重新设置");
+            }
+
+            ConfigUtil.INIT_SUCCESS = true;
+        }
+
+        public static bool Verify(string sharedSecret)
+        {
+            try
+            {
+                byte[] base64 = Convert.FromBase64String(sharedSecret);
+                Console.WriteLine("source: " + sharedSecret + ", base64 = " + base64);
+                return true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("shared_secret值校验失败, 请重新设置"); 
+                return false;
             }
         }
 
-        public static string GenerateSteamGuardCode(String sharedSecret)
+        public static string GenerateSteamGuardCode(string sharedSecret)
         {
             return new SteamTwoFactorToken(sharedSecret).GenerateSteamGuardCode();
         }

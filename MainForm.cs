@@ -16,19 +16,39 @@ using Util;
 
 namespace steam_token
 {
-    public partial class mainForm : Form
+    public partial class MainForm : Form
     {
-        public mainForm()
+        public MainForm()
         {
+            ConfigUtil.Init(new Config());
             InitializeComponent();
 
             this.timer_time.Start();
 
-            // 先计算一次
-            this.label_guard.Text = CalcOnce();
+            while (!ConfigUtil.INIT_SUCCESS) 
+            { 
+                CheckConfig();
+            }
 
             // 新开一个线程去初始化数据
             SteamGuardCalcThread.StartThread(this.label_guard, this.progressBar_refresh);
+        }
+
+        private void CheckConfig()
+        {
+            Console.WriteLine("Check Config Right Now.");
+            Config config = ConfigUtil.Read<Config>();
+
+            if (null == config || null == config.SteamGuard || !SteamTwoFactorToken.Verify(config.SteamGuard.shared_secret))
+            {
+                OpenGuardConfigForm();
+            }
+            else
+            {
+                // new SteamTwoFactorToken(steamGuard.shared_secret);
+                ConfigUtil.INIT_SUCCESS = true;
+            }
+
         }
 
         /// <summary>
@@ -38,7 +58,12 @@ namespace steam_token
         /// <param name="e"></param>
         private void GuardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GuardConfig guard = new GuardConfig();
+            OpenGuardConfigForm();
+        }
+
+        private void OpenGuardConfigForm()
+        {
+            GuardConfig guard = new GuardConfig(this.label_guard, this.progressBar_refresh);
             guard.ShowDialog(this);
         }
 
@@ -56,17 +81,7 @@ namespace steam_token
 
         private void button_recalc_Click(object sender, EventArgs e)
         {
-            this.label_guard.Text = CalcOnce();
-
             SteamGuardCalcThread.StartThread(this.label_guard, this.progressBar_refresh);
-        }
-
-        private string CalcOnce()
-        {
-            Config config = ConfigUtil.Read<Config>();
-            string guard = SteamTwoFactorToken.GenerateSteamGuardCode(config.SteamGuard.shared_secret);
-            Console.WriteLine("guard = " + guard);
-            return guard;
         }
 
         private void button_copy_Click(object sender, EventArgs e)

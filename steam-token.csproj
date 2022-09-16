@@ -217,6 +217,7 @@
     <Compile Include="UI\Set\GuardConfig.Designer.cs">
       <DependentUpon>GuardConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Util\CommonUtil.cs" />
     <Compile Include="Util\SteamGuardCalcThread.cs" />
     <Compile Include="Util\SteamTwoFactorToken.cs" />
     <Compile Include="Util\ConfigUtil.cs" />

@@ -1,7 +1,7 @@
 ﻿
 namespace steam_token
 {
-    partial class mainForm
+    partial class MainForm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -30,7 +30,7 @@ namespace steam_token
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.SettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GuardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,14 +71,14 @@ namespace steam_token
             // GuardToolStripMenuItem
             // 
             this.GuardToolStripMenuItem.Name = "GuardToolStripMenuItem";
-            this.GuardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.GuardToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.GuardToolStripMenuItem.Text = "令牌配置";
             this.GuardToolStripMenuItem.Click += new System.EventHandler(this.GuardToolStripMenuItem_Click);
             // 
             // ProgramToolStripMenuItem
             // 
             this.ProgramToolStripMenuItem.Name = "ProgramToolStripMenuItem";
-            this.ProgramToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ProgramToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.ProgramToolStripMenuItem.Text = "程序设置";
             this.ProgramToolStripMenuItem.Visible = false;
             this.ProgramToolStripMenuItem.Click += new System.EventHandler(this.ProgramToolStripMenuItem_Click);
@@ -164,7 +164,7 @@ namespace steam_token
             this.label_datetime.TabIndex = 6;
             this.label_datetime.Text = "                   ";
             // 
-            // mainForm
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -183,7 +183,7 @@ namespace steam_token
             this.Margin = new System.Windows.Forms.Padding(5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "mainForm";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Steam令牌计算器";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.mainForm_FormClosed);
