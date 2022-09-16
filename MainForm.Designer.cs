@@ -95,11 +95,11 @@ namespace steam_token
             this.progressBar_refresh.BackColor = System.Drawing.SystemColors.Control;
             this.progressBar_refresh.ForeColor = System.Drawing.SystemColors.Control;
             this.progressBar_refresh.Location = new System.Drawing.Point(12, 28);
-            this.progressBar_refresh.Maximum = 30;
+            this.progressBar_refresh.Maximum = 3000;
             this.progressBar_refresh.Name = "progressBar_refresh";
             this.progressBar_refresh.Size = new System.Drawing.Size(620, 23);
             this.progressBar_refresh.TabIndex = 2;
-            this.progressBar_refresh.Value = 30;
+            this.progressBar_refresh.Value = 3000;
             // 
             // groupBox_display
             // 

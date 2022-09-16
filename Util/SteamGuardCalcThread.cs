@@ -51,13 +51,13 @@ namespace steam_token.Util
                 return;
             }
             CalcOnce();
-            for (int i = 30; i >= 0; i--)
+            for (int i = 3000; i >= 0; i--)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(1);
                 if (i == 0)
                 {
                     CalcOnce();
-                    i = 30;
+                    i = 3000;
                 }
 
                 progressBar_refresh.Value = i;
