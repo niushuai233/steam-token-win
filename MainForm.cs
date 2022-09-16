@@ -40,7 +40,7 @@ namespace steam_token
 
             if (null == config || null == config.SteamGuard || !SteamTwoFactorToken.Verify(config.SteamGuard.shared_secret))
             {
-                OpenGuardConfigForm();
+                OpenGuardConfigForm(true);
             }
             else
             {
@@ -57,12 +57,12 @@ namespace steam_token
         /// <param name="e"></param>
         private void GuardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenGuardConfigForm();
+            OpenGuardConfigForm(false);
         }
 
-        private void OpenGuardConfigForm()
+        private void OpenGuardConfigForm(bool flag)
         {
-            GuardConfig guard = new GuardConfig(this.label_guard, this.progressBar_refresh);
+            GuardConfig guard = new GuardConfig(this.label_guard, this.progressBar_refresh, flag);
             guard.ShowDialog(this);
         }
 

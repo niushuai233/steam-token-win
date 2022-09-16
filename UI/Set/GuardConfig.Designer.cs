@@ -36,6 +36,7 @@ namespace steam_token.UI.Set
             this.button_openfile = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.button_exit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button_confirm
@@ -100,6 +101,16 @@ namespace steam_token.UI.Set
             this.label3.TabIndex = 5;
             this.label3.Text = "Tips: 手机需root或者能通过备份手段拿到该文件";
             // 
+            // button_exit
+            // 
+            this.button_exit.Location = new System.Drawing.Point(359, 97);
+            this.button_exit.Name = "button_exit";
+            this.button_exit.Size = new System.Drawing.Size(85, 30);
+            this.button_exit.TabIndex = 1;
+            this.button_exit.Text = "退出";
+            this.button_exit.UseVisualStyleBackColor = true;
+            this.button_exit.Click += new System.EventHandler(this.button_exit_Click);
+            // 
             // GuardConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
@@ -111,6 +122,7 @@ namespace steam_token.UI.Set
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox_shared_secret);
             this.Controls.Add(this.button_openfile);
+            this.Controls.Add(this.button_exit);
             this.Controls.Add(this.button_confirm);
             this.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -133,5 +145,6 @@ namespace steam_token.UI.Set
         private System.Windows.Forms.Button button_openfile;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button_exit;
     }
 }

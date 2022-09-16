@@ -19,11 +19,14 @@ namespace steam_token.UI.Set
     {
         private Label labelGuard;
         private ProgressBar progressBarRefresh;
-        public GuardConfig(Label label_guard, ProgressBar progressBar_refresh)
+        public GuardConfig(Label label_guard, ProgressBar progressBar_refresh, bool flag)
         {
+            InitializeComponent();
+
+            this.button_exit.Visible = flag;
+
             this.labelGuard = label_guard;
             this.progressBarRefresh = progressBar_refresh;
-            InitializeComponent();
             // 先初始化组件 再使用
             Config config = CommonUtil.GetConfig();
             if (null != config && null != config.SteamGuard && !string.IsNullOrEmpty(config.SteamGuard.shared_secret))
@@ -109,6 +112,11 @@ namespace steam_token.UI.Set
 
                 this.Dispose();
             }
+        }
+
+        private void button_exit_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
