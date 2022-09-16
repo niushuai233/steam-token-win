@@ -37,11 +37,12 @@ namespace steam_token.UI.Set
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button_exit = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button_confirm
             // 
-            this.button_confirm.Location = new System.Drawing.Point(451, 97);
+            this.button_confirm.Location = new System.Drawing.Point(451, 108);
             this.button_confirm.Name = "button_confirm";
             this.button_confirm.Size = new System.Drawing.Size(85, 30);
             this.button_confirm.TabIndex = 1;
@@ -95,15 +96,15 @@ namespace steam_token.UI.Set
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.label3.Location = new System.Drawing.Point(16, 101);
+            this.label3.Location = new System.Drawing.Point(16, 95);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(309, 20);
+            this.label3.Size = new System.Drawing.Size(331, 20);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Tips: 手机需root或者能通过备份手段拿到该文件";
+            this.label3.Text = "Tips: 1、手机需root或者能通过备份手段拿到该文件";
             // 
             // button_exit
             // 
-            this.button_exit.Location = new System.Drawing.Point(359, 97);
+            this.button_exit.Location = new System.Drawing.Point(359, 108);
             this.button_exit.Name = "button_exit";
             this.button_exit.Size = new System.Drawing.Size(85, 30);
             this.button_exit.TabIndex = 1;
@@ -111,12 +112,23 @@ namespace steam_token.UI.Set
             this.button_exit.UseVisualStyleBackColor = true;
             this.button_exit.Click += new System.EventHandler(this.button_exit_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.label4.Location = new System.Drawing.Point(16, 118);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(313, 20);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "         2、错误的值也可以生成token, 比如 [1234]";
+            // 
             // GuardConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(539, 132);
+            this.ClientSize = new System.Drawing.Size(539, 147);
             this.ControlBox = false;
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -146,5 +158,6 @@ namespace steam_token.UI.Set
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button_exit;
+        private System.Windows.Forms.Label label4;
     }
 }
